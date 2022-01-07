@@ -19,7 +19,7 @@ try:
         file_name=config.get('logger', 'file_name'),
     )
 
-    if 'True' in config.get('stream_resolver', 'enabled') \
+    if 'enabled' in config.get('stream_resolver', 'status') \
             and 'token' in config.get('stream_resolver', 'auth_type'):
         from src.modules.stream_resolver import Resolver
         stream_resolver = Resolver(
@@ -27,13 +27,13 @@ try:
             auth_type=config.get('stream_resolver', 'auth_type'),
             token=config.get('stream_resolver', 'token'),
         )
-    elif 'True' in config.get('stream_resolver', 'enabled') \
+    elif 'enabled' in config.get('stream_resolver', 'status') \
             and 'password' in config.get('stream_resolver', 'auth_type'):
         from src.modules.stream_resolver import Resolver
         stream_resolver = Resolver(
             graylog_url=config.get('stream_resolver', 'graylog_url'),
             auth_type=config.get('stream_resolver', 'auth_type'),
-            username=config.get('stream_resolver', 'username'),
+            login=config.get('stream_resolver', 'login'),
             password=config.get('stream_resolver', 'password'),
         )
 
@@ -51,7 +51,7 @@ try:
         create_alert = CreateThehive4Alert(
             url=config.get("thehive4", "url"),
             auth_type=config.get('thehive4', 'auth_type'),
-            username=config.get("thehive4", "username"),
+            login=config.get("thehive4", "login"),
             password=config.get("thehive4", "password"),
         )
 
