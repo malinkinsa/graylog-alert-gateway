@@ -3,14 +3,16 @@ import json
 import re
 import uuid
 
-from src.main import logger
+from src.main import config, logger
 
+if 'enabled' in config.get('stream_resolver', 'status'):
+    from src.main import stream_resolver
 
 class CreateThehive4Alert:
-    def __init__(self, url, auth_type, api_key=None, username=None, password=None):
+    def __init__(self, url, auth_type, api_key=None, login=None, password=None):
         self.url = f'{url}/api/alert'
         if 'password' in auth_type:
-            pass    # To Do
+            pass    # ToDo
         else:
             self.headers = {
                 'Authorization': f'Bearer {api_key}',
@@ -19,6 +21,7 @@ class CreateThehive4Alert:
 
     async def create_alert(self, graylog_event):
         alert_artifacts = []
+        source = []
         graylog_fields = graylog_event.event.fields
 
         ip_search_pattern = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
@@ -36,11 +39,18 @@ class CreateThehive4Alert:
             else:
                 alert_artifacts.append({"dataType": "other", "data": graylog_fields[key]})
 
+        if 'enabled' in config.get('stream_resolver', 'status'):
+            for n, streams in enumerate(graylog_event.event.source_streams):
+                stream_id = await stream_resolver.stream_name_resolve(streams)
+                source.append(stream_id['description'])
+        else:
+            source.append('AlertGateway')
+
         alert_body = {
             'title': graylog_event.event_definition_title,
             'description': graylog_event.event_definition_description,
             'type': 'external',
-            'source': 'Graylog Alert Gateway',
+            'source': str(*source),
             'sourceRef': str(uuid.uuid4())[0:6],
             'severity': graylog_event.event.priority,
             'artifacts': alert_artifacts,
