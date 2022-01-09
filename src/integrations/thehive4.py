@@ -1,3 +1,4 @@
+import base64
 import httpx
 import json
 import re
@@ -8,11 +9,16 @@ from src.main import config, logger
 if 'enabled' in config.get('stream_resolver', 'status'):
     from src.main import stream_resolver
 
+
 class CreateThehive4Alert:
     def __init__(self, url, auth_type, api_key=None, login=None, password=None):
         self.url = f'{url}/api/alert'
         if 'password' in auth_type:
-            pass    # ToDo
+            self.credentials = base64.b64encode(f'{login}:{password}'.encode('ascii')).decode("utf-8")
+            self.headers = {
+                'Authorization': 'Basic %s' % self.credentials,
+                'Content-Type': 'application/json',
+            }
         else:
             self.headers = {
                 'Authorization': f'Bearer {api_key}',
@@ -60,7 +66,7 @@ class CreateThehive4Alert:
             alert_creating = await client.post(
                 self.url,
                 data=json.dumps(alert_body),
-                headers=self.headers
+                headers=self.headers,
             )
 
         if alert_creating.status_code == 401:
@@ -73,11 +79,11 @@ class CreateThehive4Alert:
             logger.logging(
                 f'Unable to create alert by reason of page not found. Status code: {alert_creating.status_code}',
                 logger_level='ERROR',
-                source='TheHive4'
+                source='TheHive4',
             )
         if alert_creating.status_code == 403:
             logger.logging(
                 f'Unable to create alert by reason of access forbidden. Status code: {alert_creating.status_code}',
                 logger_level='ERROR',
-                source='TheHive4'
+                source='TheHive4',
             )
