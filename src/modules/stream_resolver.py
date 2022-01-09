@@ -10,10 +10,10 @@ class Resolver:
             'Accept': 'application/json',
         }
 
-        if 'token' in auth_type:
-            self.auth = (token, 'token')
+        if 'password' in auth_type:
+            self.auth = f'{login}:{password}'
         else:
-            pass    # ToDo
+            self.auth = (token, 'token')
 
     async def stream_name_resolve(self, stream_id):
         api = f'{self.graylog}/api/streams/{stream_id}'
