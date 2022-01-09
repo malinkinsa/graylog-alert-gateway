@@ -2,10 +2,10 @@
 
 Web based application designed to integrate graylog with different IRP systems.
 
-- [Graylog Alert Gateway](#Graylog Alert Gateway)
+- [Graylog Alert Gateway](#Graylog-Alert-Gateway)
   - [Description](#Description) 
   - [Environment](#Environment)
-  - [To Do](#To Do)
+  - [To Do](#To-Do)
 
 ## Description
 This application allows you to deliver graylog alert data to the following irp systems:
