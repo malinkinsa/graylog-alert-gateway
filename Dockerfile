@@ -12,7 +12,7 @@ USER $USER
 WORKDIR /opt/graylog-alert-gateway
 RUN \
     pip3 install --no-cache-dir --upgrade pip --user && \
-    pip3 install -r requirements.txt --user
+    pip3 install --no-cache-dir -r requirements.txt --user
 CMD python3 launch.py
 
 
