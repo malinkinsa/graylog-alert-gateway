@@ -6,16 +6,16 @@ class AlertBody(BaseModel):
     id: str
     timestamp: str
     timestamp_processing: str
-    timerange_start: Optional[str] = None
-    timerange_end: Optional[str] = None
-    streams: List[str] = None
-    source_streams: List[str] = None
+    timerange_start: Optional[str] = ''
+    timerange_end: Optional[str] = ''
+    streams: List[str] = []
+    source_streams: List[str] = []
     message: str
     priority: int
     alert: str
-    fields: Optional[dict] = None
-    group_by_fields: Optional[dict] = None
-    backlog: List[str] = None
+    fields: Optional[dict] = {}
+    group_by_fields: Optional[dict] = {}
+    backlog: List[str] = {}
 
 
 class GraylogEventDefinition(BaseModel):
