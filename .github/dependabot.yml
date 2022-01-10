@@ -4,3 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "smalinkin"
+    reviewers:
+      - "smalinkin"
