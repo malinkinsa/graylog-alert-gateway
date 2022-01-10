@@ -11,7 +11,7 @@ class Resolver:
         }
 
         if 'password' in auth_type:
-            self.auth = f'{login}:{password}'
+            self.auth = (login, password)
         else:
             self.auth = (token, 'token')
 
