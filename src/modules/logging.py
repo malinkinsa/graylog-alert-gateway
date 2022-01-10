@@ -5,7 +5,7 @@ import sys
 from os.path import abspath, dirname, join
 
 
-class Logger:
+class Logging:
     def __init__(self, logger_name='Alert Gateway', file_name='event.log'):
         self.logger = logging.getLogger(logger_name)
         self.logger.propagate = False

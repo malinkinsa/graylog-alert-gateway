@@ -13,8 +13,8 @@ app = FastAPI(
 )
 
 try:
-    from src.modules.logger import Logger
-    logger = Logger(
+    from src.modules.logging import Logging
+    logger = Logging(
         logger_name=config.get('logger', 'name'),
         file_name=config.get('logger', 'file_name'),
     )
