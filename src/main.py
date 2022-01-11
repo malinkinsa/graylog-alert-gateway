@@ -55,8 +55,18 @@ try:
             password=config.get("thehive4", "password"),
         )
 
+    if 'enabled' in config.get('telegram', 'status'):
+        from src.integrations.misc.telegram import SendToTelegram
+        telegram = SendToTelegram(
+            chat_id=config.get('telegram', 'chat_id'),
+            token=config.get('telegram', 'token'),
+        )
+
 except Exception as e:
     print(f'[!] Error on settings up global utils: {e}')
 
 from src.routers import input
 app.include_router(input.router)
+if 'enabled' in config.get('telegram', 'status'):
+    from src.routers import telegram
+    app.include_router(telegram.router)
