@@ -37,4 +37,3 @@ class Logging:
 
         else:
             self.logger.info(str(logging_message))
-
