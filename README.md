@@ -143,6 +143,10 @@ name:tag
 ```
 
 ## To Do
+- [ ] Readme about graylog setup;
+- [ ] Readme about modules:
+  - [ ] stream_resolver;
+  - [ ] telegram
 - [x] Docker support;
 - [x] README about Setup;
   - [x] Native;
