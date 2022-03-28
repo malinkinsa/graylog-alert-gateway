@@ -2,15 +2,16 @@
 
 Web based application designed to integrate graylog with different IRP systems.
 
-- [Graylog Alert Gateway](#Graylog-Alert-Gateway)
-  - [Description](#Description) 
-  - [Environment](#Environment)
+- [Graylog Alert Gateway](#graylog-alert-gateway)
+  - [Description](#description)
+  - [Environment](#environment)
   - [Setup](#setup)
     - [Native](#native)
     - [Docker & Docker-compose](#docker--docker-compose)
       - [Pre-built](#pre-built)
       - [Your own](#your-own)
-  - [To Do](#To-Do)
+  - [Graylog notification channel](#graylog-notification-channel)
+  - [To Do](#to-do)
 
 ## Description
 This application allows you to deliver graylog alert data to the following irp systems:
@@ -142,8 +143,19 @@ docker run -d \
 name:tag
 ```
 
+## Graylog notification channel
+
+- Create new Graylog Notification channel: ```Graylog -> Alert -> Notifications -> Create Notification```
+- Settings:
+  - Specify title;
+  - Notification Type: HTTP Notification;
+  - URL: Add URL there application work; For example: ```http://emaxple.com:8000/input```
+  - Add this URL to Graylog whitelist or disable whitelist in ```System -> Configurations -> URL Whitelist Configuration```
+- Add this Notification channel to Event Definition;
+- Fields, what you are specified in ```Fields``` block of your Event Definition will be artifacts in IRP system;
+
 ## To Do
-- [ ] Readme about graylog setup;
+- [x] Readme about graylog setup;
 - [ ] Readme about modules:
   - [ ] stream_resolver;
   - [ ] telegram
