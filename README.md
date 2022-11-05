@@ -156,6 +156,7 @@ name:tag
 
 ## To Do
 - [x] Readme about graylog setup;
+- [x] Sentry support;
 - [ ] Readme about modules:
   - [ ] stream_resolver;
   - [ ] telegram

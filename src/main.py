@@ -13,6 +13,22 @@ app = FastAPI(
 )
 
 try:
+    if 'enabled' in config.get('sentry', 'status'):
+        import subprocess
+        import sys
+
+        try:
+            import sentry_sdk
+        except ImportError:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", 'sentry_sdk'])
+        finally:
+            import sentry_sdk
+
+            sentry_sdk.init(
+                dsn=config.get('sentry', 'dsn_url'),
+                traces_sample_rate=config.get('sentry', 'traces_sample_rate')
+            )
+
     from src.modules.logging import Logging
     logger = Logging(
         logger_name=config.get('logger', 'name'),
