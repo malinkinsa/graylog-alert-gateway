@@ -149,7 +149,7 @@ name:tag
 - Settings:
   - Specify title;
   - Notification Type: HTTP Notification;
-  - URL: Add URL there application work; For example: ```http://emaxple.com:8000/input```
+  - URL: Add URL there application work; For example: ```http://emaxple.com:8000/input/```
   - Add this URL to Graylog whitelist or disable whitelist in ```System -> Configurations -> URL Whitelist Configuration```
 - Add this Notification channel to Event Definition;
 - Fields, what you are specified in ```Fields``` block of your Event Definition will be artifacts in IRP system;
